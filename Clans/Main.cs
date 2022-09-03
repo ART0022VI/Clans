@@ -12,6 +12,10 @@ namespace Clans
 {
     internal class Main : Plugin
     {
+        public override string Developer => "ГIеJIbмeнь#3519";
+        public override string Name => "Clans";
+        public override Version Version => new Version(1, 0, 0);
+
         public List<string> plids = new List<string>()
         {
             "Test" // тег клана
