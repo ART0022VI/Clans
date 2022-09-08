@@ -18,11 +18,12 @@ namespace Clans
 
         public List<string> plids = new List<string>()
         {
-            "Test" // тег клана
+            "PLM",
+            "XLT",
         };
         public override void Disable()
         {
-
+            Player.Join -= OnJoin;
         }
 
         public override void Enable()
@@ -35,18 +36,25 @@ namespace Clans
             {
                 string[] pre = ev.Player.Nickname.Split('[', ']');
                 string tag = pre[1];
-                Log.Info(tag);
+              //  Log.Info(tag);
                 if (plids.Contains(tag))
                 {
-                    Log.Info("Есть");
+                    if (tag == "PLM")
+                    {
+                        Qurre.API.Map.Broadcast($"Член клана PLM тут, он самый крутой!!!", 4);
+                    }
+                    else
+                    {
+                        Qurre.API.Map.Broadcast($"Член клана {tag} зашёл!", 4);
+                    }
                 }
                 else
                 {
-                    plids.Add(tag);
-                    Log.Info("добавил");
+                    //plids.Add(tag);
+                    //Log.Info("добавил");
                     foreach(var p in plids)
                     {
-                        Log.Info(p);
+                       //bla bla
                     }
                 }
             }
