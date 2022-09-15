@@ -20,6 +20,7 @@ namespace Clans
         {
             "PLM",
             "XLT",
+            "KPB",
         };
         public override void Disable()
         {
@@ -36,23 +37,18 @@ namespace Clans
             {
                 string[] pre = ev.Player.Nickname.Split('[', ']');
                 string tag = pre[1];
-              //  Log.Info(tag);
+                string nik = ($"[ <color=red> {tag} </color> ]") + ev.Player.Nickname.Split(']');
+                //  Log.Info(tag);
                 if (plids.Contains(tag))
                 {
-                    if (tag == "PLM")
-                    {
-                        Qurre.API.Map.Broadcast($"Член клана PLM тут, он самый крутой!!!", 4);
-                    }
-                    else
-                    {
-                        Qurre.API.Map.Broadcast($"Член клана {tag} зашёл!", 4);
-                    }
+                    Qurre.API.Map.ClearBroadcasts();
+                    Qurre.API.Map.Broadcast($"<color=green> Член клана <color=red> {tag} </color> зашёл! </color>", 6);
                 }
                 else
                 {
                     //plids.Add(tag);
                     //Log.Info("добавил");
-                    foreach(var p in plids)
+                    foreach (var p in plids)
                     {
                        //bla bla
                     }
