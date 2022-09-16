@@ -42,16 +42,7 @@ namespace Clans
                 if (plids.Contains(tag))
                 {
                     Qurre.API.Map.ClearBroadcasts();
-                    Qurre.API.Map.Broadcast($"<color=green> Член клана <color=red> {tag} </color> зашёл! </color>", 6);
-                }
-                else
-                {
-                    //plids.Add(tag);
-                    //Log.Info("добавил");
-                    foreach (var p in plids)
-                    {
-                       //bla bla
-                    }
+                    Qurre.API.Map.Broadcast($"<color=green> Член клана <color=red> <<{tag}>> </color> зашёл! </color>", 6);
                 }
             }
         }
