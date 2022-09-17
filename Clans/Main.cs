@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MEC;
 using Qurre;
 using Qurre.API;
 using Qurre.API.Events;
@@ -15,6 +16,7 @@ namespace Clans
         public override string Developer => "ГIеJIbмeнь#3519";
         public override string Name => "Clans";
         public override Version Version => new Version(1, 0, 0);
+        public TimeSpan TTime { get; set; }
 
         public List<string> plids = new List<string>()
         {
@@ -25,11 +27,13 @@ namespace Clans
         public override void Disable()
         {
             Player.Join -= OnJoin;
+            Qurre.Events.Round.Start -= Board;
         }
 
         public override void Enable()
         {
             Player.Join += OnJoin;
+            Qurre.Events.Round.Start += Board;
         }
         public void OnJoin(JoinEvent ev)
         {
@@ -42,7 +46,8 @@ namespace Clans
                 if (plids.Contains(tag))
                 {
                     Qurre.API.Map.ClearBroadcasts();
-                    Qurre.API.Map.Broadcast($"<color=green> Член клана <color=red> <<{tag}>> </color> зашёл! </color>", 6);
+                    Qurre.API.Map.Broadcast($"<color=green>Член клана <color=red> <<{tag}>> </color> зашёл!</color>" + "\n" + 
+                                           ("<color=yellow><size=30> Для доп. информации нажмите <color=green> [V] </color> за спеков </size></color>"), 6);
                 }
             }
         }
