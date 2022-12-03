@@ -27,13 +27,11 @@ namespace Clans
         public override void Disable()
         {
             Player.Join -= OnJoin;
-            Qurre.Events.Round.Start -= Board;
         }
 
         public override void Enable()
         {
-            Player.Join += OnJoin;
-            Qurre.Events.Round.Start += Board;
+            Player.Join += OnJoin
         }
         public void OnJoin(JoinEvent ev)
         {
@@ -46,8 +44,7 @@ namespace Clans
                 if (plids.Contains(tag))
                 {
                     Qurre.API.Map.ClearBroadcasts();
-                    Qurre.API.Map.Broadcast($"<color=green>Член клана <color=red> <<{tag}>> </color> зашёл!</color>" + "\n" + 
-                                           ("<color=yellow><size=30> Для доп. информации нажмите <color=green> [V] </color> за спеков </size></color>"), 6);
+                    Qurre.API.Map.Broadcast($"<color=green>Член клана <color=red> <<{tag}>> </color> зашёл!</color>" + "\n" + "<color=yellow><size=30> Для доп. информации нажмите <color=green> [V] </color> за спеков </size></color>", 6);
                 }
             }
         }
