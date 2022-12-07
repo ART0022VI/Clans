@@ -9,6 +9,7 @@ using Qurre.API;
 using Qurre.API.Events;
 using Qurre.Events;
 using Player = Qurre.Events.Player;
+using static Clans.Config;
 namespace Clans
 {
     internal class Main : Plugin
@@ -16,14 +17,7 @@ namespace Clans
         public override string Developer => "ГIеJIbмeнь#3519";
         public override string Name => "Clans";
         public override Version Version => new Version(1, 0, 0);
-        public TimeSpan TTime { get; set; }
-
-        public List<string> plids = new List<string>()
-        {
-            "PLM",
-            "XLT",
-            "KPB",
-        };
+        public static Config Cfg { get; private set; }
         public override void Disable()
         {
             Player.Join -= OnJoin;
@@ -31,7 +25,10 @@ namespace Clans
 
         public override void Enable()
         {
-            Player.Join += OnJoin
+            Cfg = new Config();
+            CustomConfigs.Add(Cfg);
+            if (!Cfg.IsEnable) return;
+            Player.Join += OnJoin;
         }
         public void OnJoin(JoinEvent ev)
         {
@@ -39,12 +36,12 @@ namespace Clans
             {
                 string[] pre = ev.Player.Nickname.Split('[', ']');
                 string tag = pre[1];
-                string nik = ($"[ <color=red> {tag} </color> ]") + ev.Player.Nickname.Split(']');
+                //string nik = ($"[ <color=red> {tag} </color> ]") + ev.Player.Nickname.Split(']');
                 //  Log.Info(tag);
-                if (plids.Contains(tag))
+                if (Cfg.Clantags.Contains(tag))
                 {
                     Qurre.API.Map.ClearBroadcasts();
-                    Qurre.API.Map.Broadcast($"<color=green>Член клана <color=red> <<{tag}>> </color> зашёл!</color>" + "\n" + "<color=yellow><size=30> Для доп. информации нажмите <color=green> [V] </color> за спеков </size></color>", 6);
+                    Qurre.API.Map.Broadcast(Cfg.Joinmsg, 6);
                 }
             }
         }
